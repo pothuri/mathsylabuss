@@ -1,0 +1,419 @@
+binary search
+
+#include <stdio.h>
+
+int binarySearch(int arr[], int left, int right, int target) {
+    while (left <= right) {
+        int mid = left + (right - left) / 2;
+
+         if (arr[mid] == target)
+            return mid;
+
+         if (arr[mid] < target)
+            left = mid + 1;
+        else
+            right = mid - 1;
+    }
+    return -1;
+}
+
+int main() {
+    int arr[] = {2, 5, 8, 12, 16, 23, 38, 56, 72, 91};
+    int size = sizeof(arr) / sizeof(arr[0]);
+    int target;
+
+    printf("Enter the number to search: ");
+    scanf("%d", &target);
+
+    int result = binarySearch(arr, 0, size - 1, target);
+
+    if (result != -1)
+        printf("Element found at index %d\n", result);
+    else
+        printf("Element not found in the array\n");
+
+    return 0;
+}
+-----------------------------------------------------------------
+bubble sort
+
+#include <stdio.h>
+
+void bubbleSort(int arr[], int n) {
+    int i, j, temp;
+    for (i = 0; i < n - 1; i++) {
+        int swapped = 0; 
+        for (j = 0; j < n - i - 1; j++) {
+            if (arr[j] > arr[j + 1]) {
+                temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+                swapped = 1;
+            }
+        }
+        if (swapped == 0)
+            break;
+    }
+}
+
+	void printArray(int arr[], int size) {
+    for (int i = 0; i < size; i++)
+        printf("%d ", arr[i]);
+    printf("\n");
+}
+
+int main() {
+    int arr[] = {64, 34, 25, 12, 22, 11, 90};
+    int n = sizeof(arr) / sizeof(arr[0]);
+
+    printf("Original array: ");
+    printArray(arr, n);
+
+    bubbleSort(arr, n);
+
+    printf("Sorted array: ");
+    printArray(arr, n);
+
+    return 0;
+}
+
+
+------------------------------------------
+
+selection sort
+
+
+#include <stdio.h>
+
+void selectionSort(int arr[], int n) {
+    int i, j, minIndex, temp;
+
+    for (i = 0; i < n - 1; i++) {
+        minIndex = i; 
+
+
+        for (j = i + 1; j < n; j++) {
+            if (arr[j] < arr[minIndex])
+                minIndex = j;
+        }
+
+
+        if (minIndex != i) {
+            temp = arr[i];
+            arr[i] = arr[minIndex];
+            arr[minIndex] = temp;
+        }
+    }
+}
+
+void printArray(int arr[], int size) {
+    for (int i = 0; i < size; i++)
+        printf("%d ", arr[i]);
+    printf("\n");
+}
+
+int main() {
+    int arr[] = {64, 25, 12, 22, 11};
+    int n = sizeof(arr) / sizeof(arr[0]);
+
+    printf("Original array: ");
+    printArray(arr, n);
+
+    selectionSort(arr, n);
+
+    printf("Sorted array: ");
+    printArray(arr, n);
+
+    return 0;
+}
+
+
+
+
+
+
+
+----------------------------------
+string vs array
+
+string is seq of chars
+array is collection of element of same data type like int, float  chars
+
+string is fixed or dynamic
+array is only fixed
+
+str[0],str[1] to acccess char in string
+arr[0],arr[1] to access array
+
+string has builtin functions  strcpy , strcmp,strlen
+array is no built in functions 
+
+to print string is simple printf
+to print array element by element using for loop
+
+-----------------------------------------------------
+  string functions
+
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    char str1[50], str2[50], str3[100];
+
+     printf("Enter first string: ");
+    scanf("%s", str1);
+
+    printf("Enter second string: ");
+    scanf("%s", str2);
+
+     printf("Length of first string: %lu\n", strlen(str1));
+    printf("Length of second string: %lu\n", strlen(str2));
+
+     strcpy(str3, str1);
+    printf("Copied first string into str3: %s\n", str3);
+
+     strcat(str3, str2);
+    printf("After concatenation: %s\n", str3);
+
+     int cmp = strcmp(str1, str2);
+    if (cmp == 0)
+        printf("Both strings are equal.\n");
+     else
+        printf("First string is greater than second string.\n");
+
+    return 0;
+}
+
+----------------------------------------------------------------------------
+
+array 2simentiona , 3dimentional in 1 program
+
+
+#include <stdio.h>
+
+int main() {
+
+    int arr1D[5] = {10, 20, 30, 40, 50};
+
+
+    int arr2D[2][3] = {
+        {1, 2, 3},
+        {4, 5, 6}
+    };
+
+
+    printf("One-Dimensional Array:\n");
+    for (int i = 0; i < 5; i++) {
+        printf("%d ", arr1D[i]);
+    }
+    printf("\n");
+
+    printf("Two-Dimensional Array:\n");
+    for (int i = 0; i < 2; i++) {
+        for (int j = 0; j < 3; j++) {
+            printf("%d ", arr2D[i][j]);
+        }
+        printf("\n");  	
+    }
+
+arr2D[1][1] = 88;
+arr1D[2] = 99
+
+
+   printf("One-Dimensional Array:\n");
+    for (int i = 0; i < 5; i++) {
+        printf("%d ", arr1D[i]);
+    }
+    printf("\n");
+
+    printf("Two-Dimensional Array:\n");
+    for (int i = 0; i < 2; i++) {
+        for (int j = 0; j < 3; j++) {
+            printf("%d ", arr2D[i][j]);
+        }
+        printf("\n");  	
+    }
+
+    return 0;
+}
+
+----------------------------------------------------
+
+
+quadratic equation
+
+
+#include <stdio.h>
+#include <math.h>
+
+int main() {
+    double a, b, c, discriminant, root1, root2;
+
+    printf("Enter the coefficients a, b, and c: ");
+    scanf("%lf %lf %lf", &a, &b, &c);
+
+
+    discriminant = (b * b) - (4 * a * c);
+
+
+    if (discriminant > 0) {
+        
+        root1 = (-b + sqrt(discriminant)) / (2 * a);
+        root2 = (-b - sqrt(discriminant)) / (2 * a);
+        printf("The roots are real and different.\n");
+        printf("Root 1 = %.2lf\n", root1);
+        printf("Root 2 = %.2lf\n", root2);
+    } 
+    else if (discriminant == 0) {
+    
+        root1 = -b / (2 * a);
+        printf("The root is real and equal.\n");
+        printf("Root = %.2lf\n", root1);
+    } 
+    else {
+
+        double realPart = -b / (2 * a);
+        double imaginaryPart = sqrt(-discriminant) / (2 * a);
+        printf("The roots are complex and different.\n");
+        printf("Root 1 = %.2lf + %.2lfi\n", realPart, imaginaryPart);
+        printf("Root 2 = %.2lf - %.2lfi\n", realPart, imaginaryPart);
+    }
+
+    return 0;
+}
+
+
+--------------------
+algebra expression  
+
+
+#include <stdio.h>
+
+int main() {
+    double a, b, c, x, result;
+
+
+    printf("Enter the coefficients a, b, and c: ");
+    scanf("%lf %lf %lf", &a, &b, &c);
+
+    printf("Enter the value of x: ");
+    scanf("%lf", &x);
+
+
+    result = (a * x * x) + (b * x) + c;
+
+
+    printf("Result: %.2lf\n", result); 
+    return 0;
+}
+
+--------------------------------
+prime number
+
+#include <stdio.h>
+
+int main() {
+    int num, i, isPrime = 1;
+
+    printf("Enter a number: ");
+    scanf("%d", &num);
+
+    if (num <= 1) {
+        isPrime = 0;
+    } 
+	
+	else {
+        for (i = 2; i * i <= num; i++) {
+            if (num % i == 0) {
+                isPrime = 0;
+                break;
+            }
+        }
+    }
+
+    if (isPrime)
+        printf("%d is a Prime number.\n", num);
+    else
+        printf("%d is NOT a Prime number.\n", num);
+
+    return 0;
+}
+
+-----------------------------------
+
+min and max
+
+#include <stdio.h>
+
+int main() {
+    int n, i, min, max;
+
+     printf("Enter the number of elements: ");
+    scanf("%d", &n);
+
+    int arr[n]; 
+
+
+    printf("Enter %d numbers: ", n);
+    for (i = 0; i < n; i++) {
+        scanf("%d", &arr[i]);
+    }
+
+    min = max = arr[0];
+
+    for (i = 1; i < n; i++) {
+        if (arr[i] < min) {
+            min = arr[i];
+        }
+        if (arr[i] > max) {
+            max = arr[i];
+        }
+    }
+
+    printf("Minimum value: %d\n", min);
+    printf("Maximum value: %d\n", max);
+
+    return 0;
+}
+
+
+---------------------------------
+factorial
+
+#include <stdio.h>
+
+int main() {
+    int num, i;
+    unsigned long long factorial = 1; 
+
+
+    printf("Enter a number: ");
+    scanf("%d", &num);
+
+    if (num < 0) {
+        printf("Factorial is not defined for negative numbers.\n");
+    } else {
+  
+        for (i = 1; i <= num; i++) {
+            factorial *= i;
+        }
+        printf("Factorial  is %llu\n", factorial);
+    }
+
+    return 0;
+}
+
+--------------
+
+file inclusion , macro substition 
+
+
+#include <stdio.h>
+
+int main() {
+
+#define PI 3.14159
+printf("Value of PI: %f\n", PI);
+
+    return 0;
+}
